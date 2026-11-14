@@ -20,7 +20,7 @@ Claude Code 웹(claude.ai/code) 클라우드 세션 초기 세팅 스크립트.
 3. **Setup script** 필드에 아래 한 줄 입력 후 저장:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/jadewisemann/claude-code-web--init-script/main/init.sh | bash
+curl -fsSL https://raw.githubusercontent.com/jadewisemann/harness/main/claude-code-web-init-script/init.sh | bash
 ```
 
 4. 새 세션을 시작하면 Claude Code가 뜨기 전에 스크립트가 실행된다 (Ubuntu 24.04, root).

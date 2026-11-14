@@ -75,8 +75,8 @@ Git 파일명은 UTF-8을 지원하며 해석할 수 없는 바이트가 있으�
 아래 경로와 작업 이름은 가상 예시입니다. 이미 Git 저장소가 있는 baseline 폴더에 설치하세요.
 
 ```sh
-git clone https://github.com/jadewisemann/own-harness.git
-cd own-harness
+git clone https://github.com/jadewisemann/harness.git
+cd harness/own-harness
 bun packages/codex/harness.js install /absolute/path/project
 bun packages/codex/harness.js doctor /absolute/path/project
 ```

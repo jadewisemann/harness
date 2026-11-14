@@ -10,7 +10,11 @@
 
 ```sh
 mkdir -p .agents/skills
-git clone https://github.com/jadewisemann/pstack-codex.git .agents/skills/pstack-codex
+tmp=$(mktemp -d)
+git clone -q --depth 1 --filter=blob:none --sparse https://github.com/jadewisemann/harness.git "$tmp"
+git -C "$tmp" sparse-checkout set pstack-codex
+cp -R "$tmp/pstack-codex" .agents/skills/pstack-codex
+rm -rf "$tmp"
 ```
 
 Codex는 `.agents/skills`에서 로컬 스킬을 읽습니다. 새 스킬이 목록에 나타나지 않으면 Codex를 재시작하세요. 설치 위치와 탐색 방식은 [공식 Skills 문서](https://learn.chatgpt.com/docs/build-skills)를 따릅니다.

@@ -14,8 +14,8 @@ Skill text is written in Korean.
 ## Install
 
 ```
-/plugin marketplace add jadewisemann/agent-harness
-/plugin install agent-harness@agent-harness
+/plugin marketplace add jadewisemann/harness
+/plugin install agent-harness@harness
 ```
 
 For local testing without installing: `claude --plugin-dir /path/to/agent-harness`.

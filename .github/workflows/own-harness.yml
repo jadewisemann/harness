@@ -1,9 +1,14 @@
-name: check
-on: [push, pull_request, workflow_dispatch]
+name: own-harness check
+on:
+  push:
+    paths: ['own-harness/**', '.github/workflows/own-harness.yml']
+  pull_request:
+    paths: ['own-harness/**', '.github/workflows/own-harness.yml']
+  workflow_dispatch:
 permissions:
   contents: read
 concurrency:
-  group: check-${{ github.ref }}
+  group: own-harness-check-${{ github.ref }}
   cancel-in-progress: true
 jobs:
   check:
@@ -20,6 +25,7 @@ jobs:
           bun-version: '1.4.2'
       - name: Run all tests
         shell: bash
+        working-directory: own-harness
         run: |
           mkdir -p test-results
           set -o pipefail
@@ -29,7 +35,7 @@ jobs:
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: tests-${{ matrix.os }}-${{ github.sha }}
-          path: test-results/
+          path: own-harness/test-results/
           if-no-files-found: error
           retention-days: 14
   package:
@@ -42,7 +48,7 @@ jobs:
         shell: bash
         run: |
           mkdir -p dist
-          git archive --format=tar.gz --prefix=own-harness/ --output=dist/own-harness.tar.gz HEAD AGENTS.md DESIGN.md README.md LICENSE package.json docs packages
+          git archive --format=tar.gz --prefix=own-harness/ --output=dist/own-harness.tar.gz HEAD:own-harness AGENTS.md DESIGN.md README.md LICENSE package.json docs packages
           cd dist
           sha256sum own-harness.tar.gz > SHA256SUMS
       - name: Save distribution

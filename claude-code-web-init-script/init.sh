@@ -2,7 +2,8 @@
 # Claude Code 웹 샌드박스 초기 세팅: 플러그인 설치 + 로컬 skill 배치
 set -uo pipefail
 
-REPO_URL="https://github.com/jadewisemann/claude-code-web--init-script"
+REPO_URL="https://github.com/jadewisemann/harness"
+REPO_SUBDIR="claude-code-web-init-script"
 
 MARKETPLACES=(
   snflkd/fluent-korean
@@ -30,8 +31,9 @@ fi
 # 2. 로컬 skill 배치 (curl | bash 실행이면 레포를 임시로 클론)
 SRC="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" 2>/dev/null && pwd)"
 if [ ! -d "$SRC/skills" ]; then
-  SRC="$(mktemp -d)"
-  git clone -q --depth 1 "$REPO_URL" "$SRC"
+  TMP="$(mktemp -d)"
+  git clone -q --depth 1 "$REPO_URL" "$TMP"
+  SRC="$TMP/$REPO_SUBDIR"
 fi
 mkdir -p "$HOME/.claude/skills"
 cp -r "$SRC/skills/." "$HOME/.claude/skills/"
